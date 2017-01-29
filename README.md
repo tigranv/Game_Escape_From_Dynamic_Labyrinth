@@ -6,9 +6,11 @@
 
 > Level1
 
-![winner](https://cloud.githubusercontent.com/assets/24522089/22404940/6b6bd3dc-e654-11e6-9272-0064b8986bc4.gif)
+![winner1](https://cloud.githubusercontent.com/assets/24522089/22405107/bdbfaddc-e656-11e6-80d9-3c5fef68ff30.gif)
+
 
 > Special Thanks to [Hayk Harutyunyan] (https://github.com/harutyunyanhayk) and [Hovo Nalbandyan] (https://github.com/HovoNalbandyan)
+
 
 
 > This game is written on C# 6.0, .NET Framework 4.6 Visual Studio 2015 Comunity Edition
