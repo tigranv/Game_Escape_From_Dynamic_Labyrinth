@@ -37,7 +37,9 @@ namespace Game_Escape_From_Lab
                 }
                 Console.Clear();
                 lab.DrawLife();
-                Thread thread = new Thread(lab.DrawPlayer);
+                //Thread thread = new Thread(lab.DrawPlayer);
+                ThreadStart writeSecond = new ThreadStart(lab.DrawPlayer);
+                Thread thread = new Thread(writeSecond);
                 thread.Start();
                 lab.DrawLabirinth();
 

@@ -13,8 +13,8 @@ namespace Game_Escape_From_Lab
         private int x;
         private int y;
         private Player Player1;
-        public bool playing;
-        public int timer;
+        private bool playing;
+        private int timer;
 
 
         // constructor
@@ -78,13 +78,13 @@ namespace Game_Escape_From_Lab
                 timer -= 150;
                 Timer();
 
-                while (matrix[rdx, rdy] == 5)
+                while (matrix[rdx, rdy] == 5 && playing)
                 {
                     Thread.Sleep(x * 150);
                     timer -= 150;
                     Timer();
                 }
-                matrix[rdx, rdy] = 1;
+                matrix[rdx, rdy] = playing?1:5;
                 Draw();
             }
 
@@ -121,16 +121,16 @@ namespace Game_Escape_From_Lab
                         }
                         break;
                     case ConsoleKey.RightArrow:
-                        if ((matrix[Player1.LocationX, Player1.LocationY + 1] == 0) && (Player1.LocationY + 1 != y - 1))
+                        if ((matrix[Player1.LocationX, Player1.LocationY + 1] == 0))
                         {
                             matrix[Player1.LocationX, Player1.LocationY++] = 0;
                             matrix[Player1.LocationX, Player1.LocationY] = 5;
-                        }
-                        if ((matrix[Player1.LocationX, Player1.LocationY + 1] == 0) && (Player1.LocationY + 1 == y - 1))
-                        {
-                            matrix[Player1.LocationX, Player1.LocationY] = 0;
-                            playing = false;
-                            break;
+
+                            if(Player1.LocationY == (y - 1))
+                            {
+                                playing = false;
+                                break;
+                            }          
                         }
                         break;
                     case ConsoleKey.UpArrow:
