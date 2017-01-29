@@ -9,11 +9,13 @@ namespace Game_Escape_From_Lab
 {
     public class Game
     {
-        public int[,] matrix;
+        private int[,] matrix;
         private int x;
         private int y;
-        public Player Player1;
-        public bool playing = true;
+        private Player Player1;
+        public bool playing;
+        public int timer;
+
 
         // constructor
         public Game(LabirinthSize S)
@@ -41,6 +43,8 @@ namespace Game_Escape_From_Lab
 
             matrix = new int[x, y];
             Player1 = new Player(3, 1);
+            playing = true;
+            timer = x * x * 150;
 
             for (int i = 0; i < x; i++)
             {
@@ -59,25 +63,36 @@ namespace Game_Escape_From_Lab
             }
         }
 
-        public void DrowLabirinth()
+        // Methods for gaming
+        public void DrawLabirinth()
         {
-            while (playing)
+            while (playing && timer > 0)
             {
                 Random rd = new Random();
                 int rdx = rd.Next(1, x - 1);
                 int rdy0 = rd.Next(1, y - 1);
                 int rdy = (rdy0 % 2 == 0) ? rdy0 : (rdy0 + 1 != y ? (rdy0 + 1) : (rdy0 - 1));
                 matrix[rdx, rdy] = 0;
-                Drow();
+                Draw();
                 Thread.Sleep(x * 150);
+                timer -= 150;
+                Timer();
+
+                while (matrix[rdx, rdy] == 5)
+                {
+                    Thread.Sleep(x * 150);
+                    timer -= 150;
+                    Timer();
+                }
                 matrix[rdx, rdy] = 1;
+                Draw();
             }
 
         }
 
-        public void DrowPlayer()
+        public void DrawPlayer()
         {
-            while (playing)
+            while (playing && timer > 0)
             {
                 Console.SetCursorPosition(21, 12);
                 ConsoleKey move = Console.ReadKey().Key;
@@ -125,12 +140,14 @@ namespace Game_Escape_From_Lab
                     default:
                         break;
                 }
-                Drow();
+                Draw();
+                Timer();
             }
         }
 
+
         // Plotter
-        private void Drow()
+        private void Draw()
         {
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
@@ -156,6 +173,14 @@ namespace Game_Escape_From_Lab
                 }
             }
 
+        }
+
+        //Timer
+        private void Timer()
+        {
+
+            Console.SetCursorPosition(20, 0);
+            Console.WriteLine(timer / 150);
         }
     }
 }

@@ -15,28 +15,25 @@ namespace Game_Escape_From_Lab
 
             Game lab = new Game(LabirinthSize.Medium);
 
-            while (lab.playing)
+            Thread thread = new Thread(lab.DrawPlayer);
+            thread.Start();
+            lab.DrawLabirinth();
+
+            do
             {
-                Thread thread = new Thread(lab.DrowPlayer);
-                thread.Start();
-
-                lab.DrowLabirinth();
+                if (lab.playing && lab.timer > 0)
+                {
+                    Console.Clear();
+                    Console.WriteLine("You Won");
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Game Over");
+                }
+                Console.WriteLine("Press escape to exit");
             }
-
-            if (!lab.playing)
-            {
-                Console.Clear();
-                Console.WriteLine("You Won");
-            }
-            else
-            {
-                Console.Clear();
-                Console.WriteLine("Game Over");
-            }
-
-
-
-            Console.ReadKey();
+            while (Console.ReadKey().Key != ConsoleKey.Escape);
         }
     }
 }
