@@ -13,6 +13,7 @@ namespace Game_Escape_From_Lab
         private int x;
         private int y;
         public Player Player1;
+        public bool playing = true;
 
         // constructor
         public Game(LabirinthSize S)
@@ -60,7 +61,7 @@ namespace Game_Escape_From_Lab
 
         public void DrowLabirinth()
         {
-            while (true)
+            while (playing)
             {
                 Random rd = new Random();
                 int rdx = rd.Next(1, x - 1);
@@ -76,10 +77,8 @@ namespace Game_Escape_From_Lab
 
         public void DrowPlayer()
         {
-            while (true)
+            while (playing)
             {
-                Console.SetCursorPosition(Player1.LocationY, Player1.LocationX);
-                Console.Write('*');
                 Console.SetCursorPosition(21, 12);
                 ConsoleKey move = Console.ReadKey().Key;
                 switch (move)
@@ -88,28 +87,29 @@ namespace Game_Escape_From_Lab
                         if (matrix[Player1.LocationX, Player1.LocationY - 1] == 0)
                         {
                             matrix[Player1.LocationX, Player1.LocationY] = 0;
-                            Console.SetCursorPosition(Player1.LocationY, Player1.LocationX);
-                            Console.Write(' ');
                             Player1.LocationY--;
                             matrix[Player1.LocationX, Player1.LocationY] = 5;
                         }
                         break;
                     case ConsoleKey.RightArrow:
-                        if (matrix[Player1.LocationX, Player1.LocationY + 1] == 0)
+                        if ((matrix[Player1.LocationX, Player1.LocationY + 1] == 0) && (Player1.LocationY + 1 != y - 1))
                         {
                             matrix[Player1.LocationX, Player1.LocationY] = 0;
-                            Console.SetCursorPosition(Player1.LocationY, Player1.LocationX);
-                            Console.Write(' ');
                             Player1.LocationY++;
                             matrix[Player1.LocationX, Player1.LocationY] = 5;
+                        }
+                        if ((matrix[Player1.LocationX, Player1.LocationY + 1] == 0) && (Player1.LocationY + 1 == y - 1))
+                        {
+                            matrix[Player1.LocationX, Player1.LocationY] = 0;
+
+                            playing = false;
+                            break;
                         }
                         break;
                     case ConsoleKey.UpArrow:
                         if (matrix[Player1.LocationX - 1, Player1.LocationY] == 0)
                         {
                             matrix[Player1.LocationX, Player1.LocationY] = 0;
-                            Console.SetCursorPosition(Player1.LocationY, Player1.LocationX);
-                            Console.Write(' ');
                             Player1.LocationX--;
                             matrix[Player1.LocationX, Player1.LocationY] = 5;
                         }
@@ -118,8 +118,6 @@ namespace Game_Escape_From_Lab
                         if (matrix[Player1.LocationX + 1, Player1.LocationY] == 0)
                         {
                             matrix[Player1.LocationX, Player1.LocationY] = 0;
-                            Console.SetCursorPosition(Player1.LocationY, Player1.LocationX);
-                            Console.Write(' ');
                             Player1.LocationX++;
                             matrix[Player1.LocationX, Player1.LocationY] = 5;
                         }
@@ -127,7 +125,7 @@ namespace Game_Escape_From_Lab
                     default:
                         break;
                 }
-
+                Drow();
             }
         }
 

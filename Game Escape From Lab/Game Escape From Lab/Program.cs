@@ -13,14 +13,26 @@ namespace Game_Escape_From_Lab
         {
             Console.CursorVisible = false;
 
-
             Game lab = new Game(LabirinthSize.Medium);
 
+            while (lab.playing)
+            {
+                Thread thread = new Thread(lab.DrowPlayer);
+                thread.Start();
 
-            Thread thread = new Thread(lab.DrowPlayer);
-            thread.Start();
+                lab.DrowLabirinth();
+            }
 
-            lab.DrowLabirinth();
+            if (!lab.playing)
+            {
+                Console.Clear();
+                Console.WriteLine("You Won");
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Game Over");
+            }
 
 
 
