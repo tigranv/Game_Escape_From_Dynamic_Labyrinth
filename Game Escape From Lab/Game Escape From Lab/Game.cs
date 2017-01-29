@@ -31,7 +31,7 @@ namespace Game_Escape_From_Lab
                     y = 11;
                     break;
                 case LabirinthSize.Large:
-                    x = 10;
+                    x = 9;
                     y = 21;
                     break;
                 default:
@@ -88,6 +88,21 @@ namespace Game_Escape_From_Lab
                 Draw();
             }
 
+            if (!playing && timer > 0)
+            {
+                Console.SetCursorPosition(Player1.LocationY, Player1.LocationX);
+                Console.Write("\u263B");
+                Console.SetCursorPosition(22, 4);
+                Console.WriteLine("CONGRATULATIONS YOU WON  \u263B");
+            }
+            if (playing && timer <= 0)
+            {
+                Console.SetCursorPosition(Player1.LocationY, Player1.LocationX);
+                Console.Write("\u2628");
+                Console.SetCursorPosition(22, 4);
+                Console.Write("Looser   \u2620");
+            }
+
         }
 
         public void DrawPlayer()
@@ -101,16 +116,14 @@ namespace Game_Escape_From_Lab
                     case ConsoleKey.LeftArrow:
                         if (matrix[Player1.LocationX, Player1.LocationY - 1] == 0)
                         {
-                            matrix[Player1.LocationX, Player1.LocationY] = 0;
-                            Player1.LocationY--;
+                            matrix[Player1.LocationX, Player1.LocationY--] = 0;
                             matrix[Player1.LocationX, Player1.LocationY] = 5;
                         }
                         break;
                     case ConsoleKey.RightArrow:
                         if ((matrix[Player1.LocationX, Player1.LocationY + 1] == 0) && (Player1.LocationY + 1 != y - 1))
                         {
-                            matrix[Player1.LocationX, Player1.LocationY] = 0;
-                            Player1.LocationY++;
+                            matrix[Player1.LocationX, Player1.LocationY++] = 0;
                             matrix[Player1.LocationX, Player1.LocationY] = 5;
                         }
                         if ((matrix[Player1.LocationX, Player1.LocationY + 1] == 0) && (Player1.LocationY + 1 == y - 1))
@@ -123,16 +136,14 @@ namespace Game_Escape_From_Lab
                     case ConsoleKey.UpArrow:
                         if (matrix[Player1.LocationX - 1, Player1.LocationY] == 0)
                         {
-                            matrix[Player1.LocationX, Player1.LocationY] = 0;
-                            Player1.LocationX--;
+                            matrix[Player1.LocationX--, Player1.LocationY] = 0;
                             matrix[Player1.LocationX, Player1.LocationY] = 5;
                         }
                         break;
                     case ConsoleKey.DownArrow:
                         if (matrix[Player1.LocationX + 1, Player1.LocationY] == 0)
                         {
-                            matrix[Player1.LocationX, Player1.LocationY] = 0;
-                            Player1.LocationX++;
+                            matrix[Player1.LocationX++, Player1.LocationY] = 0;
                             matrix[Player1.LocationX, Player1.LocationY] = 5;
                         }
                         break;
@@ -147,19 +158,14 @@ namespace Game_Escape_From_Lab
                 Console.SetCursorPosition(Player1.LocationY, Player1.LocationX);
                 Console.Write("\u263B");
                 Console.SetCursorPosition(22, 4);
-                Console.WriteLine("CONGRATULATIONS YOU WON  \u263B");
-                Console.SetCursorPosition(22, 5);
-                Console.WriteLine("Press Esc to Exit or Enter to play again");
+                Console.WriteLine("CONGRATULATIONS YOU WON  \u263B");   
             }
-
             if (playing && timer <= 0)
             {
                 Console.SetCursorPosition(Player1.LocationY, Player1.LocationX);
                 Console.Write("\u2628");
                 Console.SetCursorPosition(22, 4);
                 Console.Write("Looser   \u2620");
-                Console.SetCursorPosition(22, 5);
-                Console.WriteLine("Press Esc to Exit or Enter to play again");
             }
         }
 
@@ -171,21 +177,24 @@ namespace Game_Escape_From_Lab
             {
                 for (int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    Console.SetCursorPosition(j, i);
                     if (matrix[i, j] == 2)
                     {
+                        Console.SetCursorPosition(j, i);
                         Console.Write("\u22A0");
                     }
                     if (matrix[i, j] == 1)
                     {
+                        Console.SetCursorPosition(j, i);
                         Console.Write("|");
                     }
                     if (matrix[i, j] == 0)
                     {
+                        Console.SetCursorPosition(j, i);
                         Console.Write(' ');
                     }
                     if (matrix[i, j] == 5)
                     {
+                        Console.SetCursorPosition(j, i);
                         Console.Write("\u263B");
                     }
                 }
@@ -196,14 +205,19 @@ namespace Game_Escape_From_Lab
         //Timer
         private void Timer()
         {
-            Console.SetCursorPosition(22, 2);
-            Console.WriteLine("REMAINING LIFE");
-            Console.SetCursorPosition(22, 3);
-            Console.WriteLine(new string('|', x * x));
             Console.ForegroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(22, 3);
             Console.WriteLine(new string('|', x * x - timer /150));
             Console.ForegroundColor = ConsoleColor.Gray;
+        }
+
+        //Life Drawer
+        public void DrawLife()
+        {
+            Console.SetCursorPosition(22, 2);
+            Console.WriteLine("REMAINING LIFE");
+            Console.SetCursorPosition(22, 3);
+            Console.WriteLine(new string('|', x * x));
         }
     }
 }
