@@ -47,11 +47,6 @@ namespace Game_Escape_From_Lab
             playing = true;
             timer = x * x * 150;
 
-            Console.SetCursorPosition(22, 2);
-            Console.WriteLine("REMAINING LIFE");
-            Console.SetCursorPosition(22, 3);
-            Console.WriteLine(new string('|', x * x));
-
             for (int i = 0; i < x; i++)
             {
                 for (int j = 0; j < y; j++)
@@ -99,7 +94,7 @@ namespace Game_Escape_From_Lab
         {
             while (playing && timer > 0)
             {
-                Console.SetCursorPosition(21, 12);
+                Console.SetCursorPosition(20, 10);
                 ConsoleKey move = Console.ReadKey().Key;
                 switch (move)
                 {
@@ -201,6 +196,10 @@ namespace Game_Escape_From_Lab
         //Timer
         private void Timer()
         {
+            Console.SetCursorPosition(22, 2);
+            Console.WriteLine("REMAINING LIFE");
+            Console.SetCursorPosition(22, 3);
+            Console.WriteLine(new string('|', x * x));
             Console.ForegroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(22, 3);
             Console.WriteLine(new string('|', x * x - timer /150));
