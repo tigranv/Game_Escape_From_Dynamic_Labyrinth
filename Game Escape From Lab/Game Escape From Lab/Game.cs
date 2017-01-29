@@ -43,6 +43,7 @@ namespace Game_Escape_From_Lab
 
             matrix = new int[x, y];
             Player1 = new Player(3, 1);
+            matrix[3, 1] = 5;
             playing = true;
             timer = x * x * 150;
 
@@ -64,7 +65,6 @@ namespace Game_Escape_From_Lab
                         if (j % 2 == 0) matrix[i, j] = 1;
                     }
                 }
-
             }
         }
 
@@ -121,7 +121,6 @@ namespace Game_Escape_From_Lab
                         if ((matrix[Player1.LocationX, Player1.LocationY + 1] == 0) && (Player1.LocationY + 1 == y - 1))
                         {
                             matrix[Player1.LocationX, Player1.LocationY] = 0;
-
                             playing = false;
                             break;
                         }
@@ -148,6 +147,25 @@ namespace Game_Escape_From_Lab
                 Draw();
                 Timer();
             }
+            if (!playing && timer > 0)
+            {
+                Console.SetCursorPosition(Player1.LocationY, Player1.LocationX);
+                Console.Write("\u263B");
+                Console.SetCursorPosition(22, 4);
+                Console.WriteLine("CONGRATULATIONS YOU WON  \u263B");
+                Console.SetCursorPosition(22, 5);
+                Console.WriteLine("Press Esc to Exit or Enter to play again");
+            }
+
+            if (playing && timer <= 0)
+            {
+                Console.SetCursorPosition(Player1.LocationY, Player1.LocationX);
+                Console.Write("\u2628");
+                Console.SetCursorPosition(22, 4);
+                Console.Write("Looser   \u2620");
+                Console.SetCursorPosition(22, 5);
+                Console.WriteLine("Press Esc to Exit or Enter to play again");
+            }
         }
 
 
@@ -161,11 +179,11 @@ namespace Game_Escape_From_Lab
                     Console.SetCursorPosition(j, i);
                     if (matrix[i, j] == 2)
                     {
-                        Console.Write('_');
+                        Console.Write("\u22A0");
                     }
                     if (matrix[i, j] == 1)
                     {
-                        Console.Write('|');
+                        Console.Write("|");
                     }
                     if (matrix[i, j] == 0)
                     {
@@ -173,7 +191,7 @@ namespace Game_Escape_From_Lab
                     }
                     if (matrix[i, j] == 5)
                     {
-                        Console.Write('*');
+                        Console.Write("\u263B");
                     }
                 }
             }
@@ -187,7 +205,6 @@ namespace Game_Escape_From_Lab
             Console.SetCursorPosition(22, 3);
             Console.WriteLine(new string('|', x * x - timer /150));
             Console.ForegroundColor = ConsoleColor.Gray;
-
         }
     }
 }
