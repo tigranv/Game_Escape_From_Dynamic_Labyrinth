@@ -6,8 +6,7 @@
 
 > Level1
 
-![winner1](https://cloud.githubusercontent.com/assets/24522089/22405107/bdbfaddc-e656-11e6-80d9-3c5fef68ff30.gif)
-
+![small](https://cloud.githubusercontent.com/assets/24522089/22444148/38f63502-e75b-11e6-89eb-fb46962836d3.gif)
 
 > Special Thanks to [Hayk Harutyunyan] (https://github.com/harutyunyanhayk) and [Hovo Nalbandyan] (https://github.com/HovoNalbandyan)
 
