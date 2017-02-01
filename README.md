@@ -23,6 +23,55 @@ This game - example demonstrates how to create and start a thread, and shows the
 
 [Reed more about threads] (https://msdn.microsoft.com/en-us/library/aa645740(v=vs.71).aspx)
 
+```c#
+static void Main(string[] args)
+{
+    Console.CursorVisible = false;
+    Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+    do
+    {
+        Console.Clear();
+        Console.WriteLine("Select Level 1, 2, or 3");
+        string level = Console.ReadLine();
+        Game lab;
+        switch (level)
+        {
+            case "1":
+                lab = new Game(LabirinthSize.Small);
+                break;
+            case "2":
+                lab = new Game(LabirinthSize.Medium);
+                break;
+            case "3":
+                lab = new Game(LabirinthSize.Large);
+                break;
+            default:
+                lab = new Game(LabirinthSize.Medium);
+                break;
+        }
+        Console.Clear();
+        lab.DrawLife();
+
+        ThreadStart Player = new ThreadStart(lab.DrawPlayer);
+        Thread thread = new Thread(Player);
+        thread.Start();
+        lab.DrawLabirinth();
+
+        do
+        {
+            Console.SetCursorPosition(22, 5);
+            Console.WriteLine("Press Enter for Menu");
+        }
+        while (Console.ReadKey().Key != ConsoleKey.Enter);
+
+        Console.Clear();
+        Console.WriteLine("Press ENTER for NEW GAME, or  ESC to extit game"); 
+    } while (Console.ReadKey().Key == ConsoleKey.Enter);
+
+
+}
+
 
 Special Thanks to [Hayk Harutyunyan] (https://github.com/harutyunyanhayk) and [Hovo Nalbandyan] (https://github.com/HovoNalbandyan) for the valuable advice.
 
