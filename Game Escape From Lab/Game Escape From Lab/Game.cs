@@ -12,9 +12,9 @@ namespace Game_Escape_From_Lab
         private int[,] matrix;
         private int x;
         private int y;
-        private Player Player1;
-        private bool playing;
-        private int timer;
+        public Player Player1;
+        public bool playing;
+        public int timer;
 
 
         // constructor
@@ -87,22 +87,6 @@ namespace Game_Escape_From_Lab
                 matrix[rdx, rdy] = playing?1:5;
                 Draw();
             }
-
-            if (!playing && timer > 0)
-            {
-                Console.SetCursorPosition(Player1.LocationY, Player1.LocationX);
-                Console.Write("\u263B");
-                Console.SetCursorPosition(22, 4);
-                Console.WriteLine("CONGRATULATIONS YOU WON  \u263B");
-            }
-            if (playing && timer <= 0)
-            {
-                Console.SetCursorPosition(Player1.LocationY, Player1.LocationX);
-                Console.Write("\u2628");
-                Console.SetCursorPosition(22, 4);
-                Console.Write("Looser   \u2620");
-            }
-
         }
 
         public void DrawPlayer()
@@ -152,20 +136,6 @@ namespace Game_Escape_From_Lab
                 }
                 Draw();
                 Timer();
-            }
-            if (!playing && timer > 0)
-            {
-                Console.SetCursorPosition(Player1.LocationY, Player1.LocationX);
-                Console.Write("\u263B");
-                Console.SetCursorPosition(22, 4);
-                Console.WriteLine("CONGRATULATIONS YOU WON  \u263B");   
-            }
-            if (playing && timer <= 0)
-            {
-                Console.SetCursorPosition(Player1.LocationY, Player1.LocationX);
-                Console.Write("\u2628");
-                Console.SetCursorPosition(22, 4);
-                Console.Write("Looser   \u2620");
             }
         }
 

@@ -43,6 +43,21 @@ namespace Game_Escape_From_Lab
                 thread.Start();
                 lab.DrawLabirinth();
 
+                if (!lab.playing && lab.timer > 0)
+                {
+                    Console.SetCursorPosition(lab.Player1.LocationY, lab.Player1.LocationX);
+                    Console.Write("\u263B");
+                    Console.SetCursorPosition(22, 4);
+                    Console.WriteLine("CONGRATULATIONS YOU WON  \u263B");
+                }
+                if (lab.playing && lab.timer <= 0)
+                {
+                    Console.SetCursorPosition(lab.Player1.LocationY, lab.Player1.LocationX);
+                    Console.Write("\u2628");
+                    Console.SetCursorPosition(22, 4);
+                    Console.Write("Looser   \u2620");
+                }
+
                 do
                 {
                     Console.SetCursorPosition(22, 5);
