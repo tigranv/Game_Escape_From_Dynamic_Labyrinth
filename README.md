@@ -73,7 +73,4 @@ static void Main(string[] args)
 }
 ```
 
-Special Thanks to [Hayk Harutyunyan] (https://github.com/harutyunyanhayk) and [Hovo Nalbandyan] (https://github.com/HovoNalbandyan) for the valuable advice.
-
-
 > This game is written on C# 6.0, .NET Framework 4.6 Visual Studio 2015 Comunity Edition
