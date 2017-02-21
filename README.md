@@ -1,5 +1,8 @@
 # Game Escape From Dynamic Labyrinth  <img src="https://cloud.githubusercontent.com/assets/24522089/21962098/41a510c8-db36-11e6-95ef-eb392a0a1919.png" align="right" width="130px" height="130px" /> 
 
+Just a funny game in console. I figured and solved this exercise to better understand threads. You need to escape from labyrinth that opens and closes its doors arbitrary. Choose difficulty(dimensions of labyrinth, lifetime, and opening doors duration) from 1 to 3 and enjoy it :)
+
+
 > Level 1
 
 ![small](https://cloud.githubusercontent.com/assets/24522089/22444148/38f63502-e75b-11e6-89eb-fb46962836d3.gif)
