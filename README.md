@@ -24,7 +24,7 @@ The advantage of threading is the ability to create applications that use more t
 This game - example demonstrates how to create and start a thread, and shows the interaction between two threads running simultaneously within the same process. Note that you don't have to stop or free the thread. This is done automatically by the .NET Framework common language runtime.
 
 
-[Reed more about threads] (https://msdn.microsoft.com/en-us/library/aa645740(v=vs.71).aspx)
+[Reed more about threads](https://msdn.microsoft.com/en-us/library/aa645740(v=vs.71).aspx)
 
 ```c#
 static void Main(string[] args)
